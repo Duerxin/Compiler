@@ -10,7 +10,7 @@ int letterIndex(char letter, char letters[], int letterNum)
 	for (int i = 0; i < letterNum; ++i)
 		if (letter == letters[i])
 			return i;
-	return -1;	
+	return -1;
 }
 
 int main(int argc, char const *argv[])
@@ -19,10 +19,13 @@ int main(int argc, char const *argv[])
 	cin >> letterNum;
 	char letter[letterNum];
 	for (int i = 0; i < letterNum; ++i)
+	{
 		cin >> letter[i];
+		// cout << letter[i];
+	}
 	int oriStateNum;
 	cin >> oriStateNum;
-	int beginState = 0, endState = 0;
+	int beginState = -1, endState = -1;
 	for (int i = 0; i < oriStateNum; ++i)
 	{
 		int tempState, tempBegin, tempEnd;
@@ -37,7 +40,14 @@ int main(int argc, char const *argv[])
 	int mappingNum;
 	cin >> mappingNum;
 	int tranform[oriStateNum][letterNum];
-	memset(tranform, -1, sizeof(tranform));
+	// memset(tranform, -1, sizeof(tranform));
+	for (int i = 0; i < oriStateNum; ++i)
+	{
+		for (int j = 0; j < letterNum; ++j)
+		{
+			tranform[i][j] = -1;
+		}
+	}
 
 	for (int i = 0; i < mappingNum; ++i)
 	{
@@ -47,37 +57,46 @@ int main(int argc, char const *argv[])
 		tranform[tempBegin][letterIndex(tempLetter, letter, letterNum)] = tempEnd;
 	}
 
-	std::vector<string> determineState;
-	determineState.push_back(to_string(beginState));
+	std::vector<vector<int> > determineState;
+	std::vector<int> beginV;
+	beginV.push_back(beginState);
+	determineState.push_back(beginV);
 	// char determineMapping[]
-	for (std::vector<string>::iterator nowState = determineState.begin(); nowState != determineState.end(); nowState++)
+	for (int z = 0; z < determineState.size(); ++z)
 	{
-		string thisStateString = *nowState;
-		cout << *nowState << endl;
+		// string thisStateVec = determineState[z];
+		cout << "------" << endl;
 		for (int j = 0; j < letterNum; ++j)
 		{
 			std::vector<int> newStateV;
-			for (int i = 0; i < thisStateString.length(); ++i)
+			for (int i = 0; i < determineState[z].size(); ++i)
 			{
-				cout << thisStateString[i] << endl;
-				if (tranform[thisStateString[i]][j] != -1)
-					newStateV.push_back(tranform[thisStateString[i]][j]);
+				int stateIndex = determineState[z][i];
+				if (tranform[stateIndex][j] != -1)
+					newStateV.push_back(tranform[stateIndex][j]);
 			}
 			sort(newStateV.begin(), newStateV.end());
 			newStateV.erase(unique(newStateV.begin(), newStateV.end()), newStateV.end());
 
-			string newStateString = "";
-			for (std::vector<int>::iterator t = newStateV.begin() ; t != newStateV.end() ; t++)
+			// string newStateString = "";
+			for (int i = 0; i < newStateV.size(); ++i)
 			{
-				cout <<  *t << endl;
-				newStateString += to_string(*t);
+				cout << newStateV[i];
+				// newStateString = newStateString + char(newStateV[i]+'0');
+				// cout << "Add";
+				// cout << newStateString << endl;
 			}
-			if (find(determineState.begin(), determineState.end(), newStateString) != determineState.end())
-			{
-				determineState.push_back(newStateString);
-				cout << newStateString << endl;
-			}
-			return 0;
+			// cout << newStateString << endl;
+			// if (newStateString == "")
+			// {
+			// 	continue;
+			// }
+			// if (find(determineState.begin(), determineState.end(), newStateString) == determineState.end())
+			// {
+			// 	determineState.push_back(newStateV);
+			// 	// cout << newStateString << endl;
+			// }
+			// return 0;
 		}
 	}
 

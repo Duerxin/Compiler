@@ -57,7 +57,7 @@ int main() {
 							while (1) {
 								int temp = letter_kong.front(); letter_kong.pop();
 								for (int r = 0; r < map.number; r++ ) {
-									if (temp == map.start[r] && map.letter[r] == ‘k‘ ) {
+									if (temp == map.start[r] && map.letter[r] == 'k' ) {
 //判断重复
 										bool iss = 1;
 										for (int qq = 0; qq < teres.number; qq++) {
