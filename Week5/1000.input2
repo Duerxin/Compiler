@@ -1,0 +1,5 @@
+main()
+{ int va=2,vb=3,vc=0;
+  vc += 2;
+  return 2*vb+va;
+}#
