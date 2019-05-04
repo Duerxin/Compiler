@@ -1,0 +1,28 @@
+delete self production:E::=E
+delete self production:F::=F
+delete self production:G::=G
+unreached Vn:Q
+delete VN:Q
+delete production:Q::=E
+delete production:Q::=E+F
+delete production:Q::=T
+delete production:Q::=S
+unusefulNv:G
+delete VN:G
+delete production:P::=G
+delete production:G::=GG
+delete production:G::=F
+unusefulNv:P
+delete VN:P
+delete production:F::=FP
+delete production:F::=P
+unusefulNv:F
+delete VN:F
+delete production:E::=S+F
+unreached Vn:S
+delete VN:S
+delete production:S::=i
+G[Z]:
+Z::=E+T
+E::=T
+T::=T*i | i
