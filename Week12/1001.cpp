@@ -24,7 +24,7 @@ public:
 			}
 		}
 	}
-	
+
 	void buildFunction(){
 		bellGraph.resize(V.size() * 2, vector<bool>(V.size() * 2, false));
 		for(int i = 0; i < V.size(); ++i){
@@ -49,7 +49,6 @@ public:
 		}
 	}
 
-	// 打印优先函数和连通矩阵
 	void print(){
 		for(int i = 0; i < V.size() * 2; ++i){
 			if(i < V.size()) printf("%3d", f[i]);
